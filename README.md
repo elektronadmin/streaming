@@ -170,7 +170,7 @@ chmod +x /tmp/record.sh
 Paste the following to `/tmp/record.sh`:
 
 ```sh
- #!/bin/bash 
+#!/bin/bash 
 ffmpeg -i $1 -c copy /tmp/record/$2.mp4;
 duration=`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /tmp/record/$2.mp4`
 cp /tmp/record/$2.mp4 /media/elektron/videos/$2__$duration.mp4;
@@ -194,8 +194,9 @@ www-data ALL=NOPASSWD: /tmp/record/record.sh
 
 https://simplebackups.com/blog/mounting-digitalocean-spaces-and-access-bucket-from-droplet/
 
-```
+```sh
 sudo apt install s3fs
+# Replace ACCESS_KEY_ID:SECRET_ACCESS_KEY
 echo ACCESS_KEY_ID:SECRET_ACCESS_KEY > ${HOME}/.passwd-s3fs && chmod 600 ${HOME}/.passwd-s3fs
 mkdir -p /media/elektron
 s3fs elektron /media/elektron -o passwd_file=${HOME}/.passwd-s3fs -o url=https://fra1.digitaloceanspaces.com -o use_path_request_style
