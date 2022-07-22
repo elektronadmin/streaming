@@ -189,3 +189,15 @@ and paste in the follwing:
 ```
 www-data ALL=NOPASSWD: /tmp/record/record.sh
 ```
+
+### S3
+
+https://simplebackups.com/blog/mounting-digitalocean-spaces-and-access-bucket-from-droplet/
+
+```
+sudo apt install s3fs
+echo ACCESS_KEY_ID:SECRET_ACCESS_KEY > ${HOME}/.passwd-s3fs && chmod 600 ${HOME}/.passwd-s3fs
+mkdir -p /media/elektron
+s3fs elektron /media/elektron -o passwd_file=${HOME}/.passwd-s3fs -o url=https://fra1.digitaloceanspaces.com -o use_path_request_style
+mkdir -p /media/elektron/record
+```
