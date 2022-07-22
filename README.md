@@ -100,3 +100,15 @@ rtmp {
         }
 }
 ```
+
+Paste the following to `/tmp/record.sh`:
+
+```sh
+ #!/bin/bash 
+ffmpeg -i $1 -c copy /tmp/record/$2.mp4;
+duration=`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /tmp/record/$2.mp4`
+cp /tmp/record/$2.mp4 /media/elektron/videos/$2__$duration.mp4;
+rm /tmp/record/$2.flv
+rm /tmp/record/$2.mp4
+```
+
