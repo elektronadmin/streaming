@@ -6,6 +6,8 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-a-video-streaming
 
 First, create a VPS with Ubuntu 20
 
+### Nginx
+
 ```
 sudo apt update
 sudo apt install -y nginx
@@ -98,6 +100,34 @@ rtmp {
 			exec_record_done sudo /tmp/record/record.sh $path $basename;
                 }
         }
+}
+```
+
+```/etc/nginx/sites-available/rmtp```:
+
+```nginx
+server {
+    listen 8080;
+    server_name localhost;
+    location / {
+        add_header Access-Control-Allow-Origin *;
+        root /var/www/html/stream;
+    }
+    location /stat {
+        rtmp_stat all;
+        rtmp_stat_stylesheet stat.xsl;
+    }
+    location /stat.xsl {
+        root /var/www/html/rtmp;
+    }
+    # rtmp control
+    location /control {
+        rtmp_control all;
+    }
+}
+
+types {
+    mpd;
 }
 ```
 
