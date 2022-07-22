@@ -101,6 +101,14 @@ rtmp {
 }
 ```
 
+### Recording
+
+```
+mkdir /tmp/record
+touch /tmp/record.sh
+chmod +x /tmp/record.sh
+```
+
 Paste the following to `/tmp/record.sh`:
 
 ```sh
