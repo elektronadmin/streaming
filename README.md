@@ -13,6 +13,7 @@ First, create a VPS with Ubuntu 20
 sudo apt update
 sudo apt install -y nginx
 sudo apt install -y libnginx-mod-rtmp
+sudo apt install -y ffmpeg
 ```
 
 Run
@@ -196,7 +197,7 @@ sudo apt install s3fs
 # Replace ACCESS_KEY_ID:SECRET_ACCESS_KEY
 echo ACCESS_KEY_ID:SECRET_ACCESS_KEY > ${HOME}/.passwd-s3fs && chmod 600 ${HOME}/.passwd-s3fs
 mkdir -p /media/elektron
-s3fs elektron /media/elektron -o passwd_file=${HOME}/.passwd-s3fs -o url=https://fra1.digitaloceanspaces.com -o use_path_request_style
+s3fs elektron /media/elektron -o passwd_file=${HOME}/.passwd-s3fs -o url=https://fra1.digitaloceanspaces.com -o use_path_request_style -o default_acl=public-read-write -o umask=0000,mp_umask=0000,uid=33,gid=33 -o nonempty
 mkdir -p /media/elektron/record
 ```
 
