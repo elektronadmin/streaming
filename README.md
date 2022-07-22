@@ -160,6 +160,7 @@ sudo cp /usr/share/doc/libnginx-mod-rtmp/examples/stat.xsl /var/www/html/rtmp/st
 mkdir /tmp/record
 touch /tmp/record/record.sh
 chmod +x /tmp/record.sh
+sudo chown -R www-data:www-data /tmp/record
 ```
 
 Run
