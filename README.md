@@ -178,3 +178,14 @@ rm /tmp/record/$2.flv
 rm /tmp/record/$2.mp4
 ```
 
+Then
+
+```
+visudo
+```
+
+and paste in the follwing:
+
+```
+www-data ALL=NOPASSWD: /tmp/record/record.sh
+```
