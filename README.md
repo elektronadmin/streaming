@@ -84,7 +84,7 @@ rtmp {
                 listen 1935;
                 chunk_size 4096;
                 allow publish all;
-				        allow play all;
+		allow play all;
 				
                 application live {
                         live on;
