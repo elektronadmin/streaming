@@ -150,7 +150,7 @@ sudo mkdir /var/www/html/stream
 
 ```
 sudo mkdir /var/www/html/rtmp
-sudo gunzip -c /usr/share/doc/libnginx-mod-rtmp/examples/stat.xsl.gz > /var/www/html/rtmp/stat.xsl`
+sudo cp /usr/share/doc/libnginx-mod-rtmp/examples/stat.xsl /var/www/html/rtmp/stat.xsl
 ```
 
 #### Finish Nginx
