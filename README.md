@@ -88,14 +88,14 @@ rtmp {
 				
                 application live {
                         live on;
-						            hls on;
+			hls on;
                         hls_path /var/www/html/stream/hls;
                         hls_fragment 3;
                         hls_playlist_length 60;
-						            record all;  
-            			      record_path /tmp/record/;  
-            			      record_suffix ___%y_%m_%d__%H_%M_%S.flv;  
-            			      exec_record_done sudo /tmp/record/record.sh $path $basename;
+			record all;  
+			record_path /tmp/record/;  
+			record_suffix ___%y_%m_%d__%H_%M_%S.flv;  
+			exec_record_done sudo /tmp/record/record.sh $path $basename;
                 }
         }
 }
