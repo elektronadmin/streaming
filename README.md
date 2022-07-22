@@ -14,7 +14,11 @@ sudo apt install -y nginx
 sudo apt install -y libnginx-mod-rtmp
 ```
 
-etc/nginx/nginx.conf:
+Run
+
+```
+sudo nano etc/nginx/nginx.conf
+```
 
 ```nginx
 user www-data;
@@ -103,7 +107,11 @@ rtmp {
 }
 ```
 
-```/etc/nginx/sites-available/rmtp```:
+Run
+
+```
+sudo nano /etc/nginx/sites-available/rmtp
+```
 
 ```nginx
 server {
@@ -129,6 +137,26 @@ server {
 types {
     mpd;
 }
+```
+
+and then
+
+```
+sudo ln -s /etc/nginx/sites-available/rtmp /etc/nginx/sites-enabled/rtmp
+sudo mkdir /var/www/html/stream
+```
+
+### Stats
+
+```
+sudo mkdir /var/www/html/rtmp
+sudo gunzip -c /usr/share/doc/libnginx-mod-rtmp/examples/stat.xsl.gz > /var/www/html/rtmp/stat.xsl`
+```
+
+#### Finish Nginx
+
+```
+sudo systemctl reload nginx.service
 ```
 
 ### Recording
