@@ -3,6 +3,7 @@
 Installation follows roughly this tutorial:
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-video-streaming-server-using-nginx-rtmp-on-ubuntu-20-04
+https://simplebackups.com/blog/mounting-digitalocean-spaces-and-access-bucket-from-droplet/
 
 First, create a VPS with Ubuntu 20
 
@@ -153,21 +154,17 @@ sudo mkdir /var/www/html/rtmp
 sudo cp /usr/share/doc/libnginx-mod-rtmp/examples/stat.xsl /var/www/html/rtmp/stat.xsl
 ```
 
-#### Finish Nginx
-
-```
-sudo systemctl reload nginx.service
-```
-
 ### Recording
 
 ```
 mkdir /tmp/record
-touch /tmp/record.sh
+touch /tmp/record/record.sh
 chmod +x /tmp/record.sh
 ```
 
-Paste the following to `/tmp/record.sh`:
+Run
+
+`nano /tmp/record/record.sh`:
 
 ```sh
 #!/bin/bash 
@@ -192,7 +189,6 @@ www-data ALL=NOPASSWD: /tmp/record/record.sh
 
 ### S3
 
-https://simplebackups.com/blog/mounting-digitalocean-spaces-and-access-bucket-from-droplet/
 
 ```sh
 sudo apt install s3fs
@@ -201,4 +197,10 @@ echo ACCESS_KEY_ID:SECRET_ACCESS_KEY > ${HOME}/.passwd-s3fs && chmod 600 ${HOME}
 mkdir -p /media/elektron
 s3fs elektron /media/elektron -o passwd_file=${HOME}/.passwd-s3fs -o url=https://fra1.digitaloceanspaces.com -o use_path_request_style
 mkdir -p /media/elektron/record
+```
+
+#### Finishing
+
+```
+sudo systemctl reload nginx.service
 ```
