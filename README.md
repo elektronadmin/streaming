@@ -177,7 +177,7 @@ Run
 #!/bin/bash 
 ffmpeg -i $1 -c copy /tmp/records/$2.mp4;
 duration=`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /tmp/records/$2.mp4`
-cp /tmp/records/$2.mp4 /media/elektron/records/$2__$duration.mp4;
+cp /tmp/records/$2.mp4 /media/elektron/records/$2___$duration.mp4;
 rm /tmp/records/$2.flv
 rm /tmp/records/$2.mp4
 ```
