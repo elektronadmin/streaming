@@ -8,7 +8,9 @@ Installation follows roughly this tutorial:
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-video-streaming-server-using-nginx-rtmp-on-ubuntu-20-04
 https://simplebackups.com/blog/mounting-digitalocean-spaces-and-access-bucket-from-droplet/
 
-First, create a VPS with Ubuntu 20
+### VPS
+
+Create a VPS with Ubuntu 20
 
 ### Nginx
 
@@ -104,9 +106,9 @@ rtmp {
                         hls_fragment 3;
                         hls_playlist_length 60;
 			record all;  
-			record_path /tmp/record/;  
+			record_path /tmp/records/;  
 			record_suffix ___%y_%m_%d__%H_%M_%S.flv;  
-			exec_record_done sudo /tmp/record/record.sh $path $basename;
+			exec_record_done sudo /tmp/records/records.sh $path $basename;
                 }
         }
 }
@@ -161,23 +163,23 @@ sudo cp /usr/share/doc/libnginx-mod-rtmp/examples/stat.xsl /var/www/html/rtmp/st
 ### Recording
 
 ```
-mkdir /tmp/record
-touch /tmp/record/record.sh
-chmod +x /tmp/record.sh
-sudo chown -R www-data:www-data /tmp/record
+mkdir /tmp/records
+touch /tmp/records/records.sh
+chmod +x /tmp/records.sh
+sudo chown -R www-data:www-data /tmp/records
 ```
 
 Run
 
-`nano /tmp/record/record.sh`:
+`nano /tmp/record/records.sh`:
 
 ```sh
 #!/bin/bash 
-ffmpeg -i $1 -c copy /tmp/record/$2.mp4;
-duration=`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /tmp/record/$2.mp4`
-cp /tmp/record/$2.mp4 /media/elektron/videos/$2__$duration.mp4;
-rm /tmp/record/$2.flv
-rm /tmp/record/$2.mp4
+ffmpeg -i $1 -c copy /tmp/records/$2.mp4;
+duration=`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /tmp/records/$2.mp4`
+cp /tmp/records/$2.mp4 /media/elektron/records/$2__$duration.mp4;
+rm /tmp/records/$2.flv
+rm /tmp/records/$2.mp4
 ```
 
 Then
@@ -189,7 +191,7 @@ visudo
 and paste in the follwing:
 
 ```
-www-data ALL=NOPASSWD: /tmp/record/record.sh
+www-data ALL=NOPASSWD: /tmp/records/records.sh
 ```
 
 ### S3
@@ -201,7 +203,7 @@ sudo apt install s3fs
 echo ACCESS_KEY_ID:SECRET_ACCESS_KEY > ${HOME}/.passwd-s3fs && chmod 600 ${HOME}/.passwd-s3fs
 mkdir -p /media/elektron
 s3fs elektron /media/elektron -o passwd_file=${HOME}/.passwd-s3fs -o url=https://fra1.digitaloceanspaces.com -o use_path_request_style -o default_acl=public-read-write -o umask=0000,mp_umask=0000,uid=33,gid=33 -o nonempty
-mkdir -p /media/elektron/record
+mkdir -p /media/elektron/records
 ```
 
 #### Finishing
