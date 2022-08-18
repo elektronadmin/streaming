@@ -1,11 +1,38 @@
+## Usage
 
-> TODO: transcoding
+### Input
+
+```
+rtmp://streaming.elektron.art/live/some-key-here
+```
+
+Example with streamkey `stream1` playing the file `tron.mp4`
+
+```
+ffmpeg -stream_loop -1 -re -i tron.mp4 -c:v libx264 -s 852x480 -b:v 128K -crf 19 -c:a aac -ar 22050 -ac 1 -f flv rtmp://streaming.elektron.art/live/stream1
+```
+
+### Output 
+
+
+```
+http://streaming.elektron.art/hls/some-key-here.m3u8
+```
+
+Example with streamkey `stream1`
+
+```
+http://streaming.elektron.art/hls/stream1.m3u8
+```
 
 ## Installation
 
-Installation follows roughly this tutorial:
+> TODO: transcoding
+
+Installation follows roughly these tutorials:
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-video-streaming-server-using-nginx-rtmp-on-ubuntu-20-04
+
 https://simplebackups.com/blog/mounting-digitalocean-spaces-and-access-bucket-from-droplet/
 
 ### VPS
