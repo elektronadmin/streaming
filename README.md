@@ -149,7 +149,7 @@ sudo nano /etc/nginx/sites-available/rmtp
 
 ```nginx
 server {
-    listen 8080;
+    listen 80;
     server_name localhost;
     location / {
         add_header Access-Control-Allow-Origin *;
@@ -178,6 +178,7 @@ and then
 ```
 sudo ln -s /etc/nginx/sites-available/rtmp /etc/nginx/sites-enabled/rtmp
 sudo mkdir /var/www/html/stream
+rm /etc/nginx/sites-available/default
 ```
 
 ### Stats
