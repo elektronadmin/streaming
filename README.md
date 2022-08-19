@@ -193,13 +193,13 @@ sudo cp /usr/share/doc/libnginx-mod-rtmp/examples/stat.xsl /var/www/html/rtmp/st
 ```
 mkdir /tmp/records
 touch /tmp/records/records.sh
-chmod +x /tmp/records.sh
+chmod +x /tmp/records/records.sh
 sudo chown -R www-data:www-data /tmp/records
 ```
 
 Run
 
-`nano /tmp/record/records.sh`:
+`nano /tmp/records/records.sh`:
 
 ```sh
 #!/bin/bash 
