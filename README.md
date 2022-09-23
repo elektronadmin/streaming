@@ -191,23 +191,23 @@ sudo cp /usr/share/doc/libnginx-mod-rtmp/examples/stat.xsl /var/www/html/rtmp/st
 ### Recording
 
 ```
-mkdir /tmp/records
-touch /tmp/records/records.sh
-chmod +x /tmp/records/records.sh
-sudo chown -R www-data:www-data /tmp/records
+mkdir /var/records
+touch /var/records/records.sh
+chmod +x /var/records/records.sh
+sudo chown -R www-data:www-data /var/records
 ```
 
 Run
 
-`nano /tmp/records/records.sh`:
+`nano /var/records/records.sh`:
 
 ```sh
 #!/bin/bash 
-ffmpeg -i $1 -c copy /tmp/records/$2.mp4;
-duration=`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /tmp/records/$2.mp4`
-cp /tmp/records/$2.mp4 /media/elektron/records/$2___$duration.mp4;
-rm /tmp/records/$2.flv
-rm /tmp/records/$2.mp4
+ffmpeg -i $1 -c copy /var/records/$2.mp4;
+duration=`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /var/records/$2.mp4`
+cp /var/records/$2.mp4 /media/elektron/records/$2___$duration.mp4;
+rm /var/records/$2.flv
+rm /var/records/$2.mp4
 ```
 
 Then
